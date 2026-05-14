@@ -1,520 +1,472 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Primary Meta Tags -->
-  <!-- TODO: Replace with your paper title and author names -->
-  <meta name="title" content="PAPER_TITLE - AUTHOR_NAMES">
-  <!-- TODO: Write a compelling 150-160 character description of your research -->
-  <meta name="description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Add 5-10 relevant keywords for your research area -->
-  <meta name="keywords" content="KEYWORD1, KEYWORD2, KEYWORD3, machine learning, computer vision, AI">
-  <!-- TODO: List all authors -->
-  <meta name="author" content="FIRST_AUTHOR_NAME, SECOND_AUTHOR_NAME">
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="English">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="article">
-  <!-- TODO: Replace with your institution or lab name -->
-  <meta property="og:site_name" content="INSTITUTION_OR_LAB_NAME">
-  <!-- TODO: Same as paper title above -->
-  <meta property="og:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta property="og:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Replace with your actual website URL -->
-  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
-  <!-- TODO: Create a 1200x630px preview image and update path -->
-  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="PAPER_TITLE - Research Preview">
-  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
-  <meta property="article:author" content="FIRST_AUTHOR_NAME">
-  <meta property="article:section" content="Research">
-  <meta property="article:tag" content="KEYWORD1">
-  <meta property="article:tag" content="KEYWORD2">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <!-- TODO: Replace with your lab/institution Twitter handle -->
-  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
-  <!-- TODO: Replace with first author's Twitter handle -->
-  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
-  <!-- TODO: Same as paper title above -->
-  <meta name="twitter:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta name="twitter:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Same as social preview image above -->
-  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta name="twitter:image:alt" content="PAPER_TITLE - Research Preview">
+<meta name="title" content="CrystalReasoner: Reasoning and RL for Property-Conditioned Crystal Structure Generation">
+<meta name="description" content="CrystalReasoner is an end-to-end LLM framework for crystal structure generation using physical-prior thinking traces and reinforcement learning with verifiable rewards.">
+<meta name="keywords" content="CrystalReasoner, crystal structure generation, materials discovery, language models, reinforcement learning, property-conditioned generation, stable unique novel materials">
+<meta name="author" content="Yuyang Wu, Stefano Falletta, Delia McGrath, Sherry Yang">
+<meta name="robots" content="index, follow">
+<meta name="language" content="English">
 
-  <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="PAPER_TITLE">
-  <meta name="citation_author" content="FIRST_AUTHOR_LAST, FIRST_AUTHOR_FIRST">
-  <meta name="citation_author" content="SECOND_AUTHOR_LAST, SECOND_AUTHOR_FIRST">
-  <meta name="citation_publication_date" content="2024">
-  <meta name="citation_conference_title" content="CONFERENCE_NAME">
-  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
-  
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#2563eb">
-  <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
-  <!-- Preconnect for performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://ajax.googleapis.com">
-  <link rel="preconnect" href="https://documentcloud.adobe.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CrystalReasoner">
+<meta property="og:title" content="CrystalReasoner: Reasoning and RL for Property-Conditioned Crystal Structure Generation">
+<meta property="og:description" content="An end-to-end LLM framework that reasons with crystallographic priors before generating atomic coordinates, then aligns structures with verifiable RL rewards.">
+<meta property="og:image" content="static/images/prediction_error.png">
+<meta property="og:image:alt" content="CrystalReasoner method overview">
+<meta property="article:section" content="Research">
+<meta property="article:tag" content="Materials discovery">
+<meta property="article:tag" content="Crystal generation">
+<meta property="article:tag" content="Reinforcement learning">
 
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CrystalReasoner">
+<meta name="twitter:description" content="Reasoning and RL for property-conditioned crystal structure generation.">
+<meta name="twitter:image" content="static/images/prediction_error.png">
+<meta name="twitter:image:alt" content="CrystalReasoner result visualization">
 
-  <!-- TODO: Replace with your paper title and authors -->
-  <title>PAPER_TITLE - AUTHOR_NAMES | Academic Research</title>
-  
-  <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
-  
-  <!-- Critical CSS - Load synchronously -->
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-  
-  <!-- Non-critical CSS - Load asynchronously -->
-  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  
-  <!-- Fallback for browsers that don't support preload -->
-  <noscript>
+<meta name="citation_title" content="CrystalReasoner: Reasoning and RL for Property-Conditioned Crystal Structure Generation">
+<meta name="citation_author" content="Wu, Yuyang">
+<meta name="citation_author" content="Falletta, Stefano">
+<meta name="citation_author" content="McGrath, Delia">
+<meta name="citation_author" content="Yang, Sherry">
+<meta name="citation_publication_date" content="2026">
+
+<meta name="theme-color" content="#2563eb">
+<meta name="msapplication-TileColor" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://ajax.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+<title>CrystalReasoner | Academic Project</title>
+
+<link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+<link rel="apple-touch-icon" href="static/images/favicon.ico">
+
+<link rel="stylesheet" href="static/css/bulma.min.css">
+<link rel="stylesheet" href="static/css/index.css">
+<link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
     <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
     <link rel="stylesheet" href="static/css/bulma-slider.min.css">
     <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  </noscript>
-  
-  <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Defer non-critical JavaScript -->
-  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/bulma-carousel.min.js"></script>
-  <script defer src="static/js/bulma-slider.min.js"></script>
-  <script defer src="static/js/index.js"></script>
-  
-  <!-- Structured Data for Academic Papers -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyArticle",
-    "headline": "PAPER_TITLE",
-    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
-    "author": [
-      {
-        "@type": "Person",
-        "name": "FIRST_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      },
-      {
-        "@type": "Person",
-        "name": "SECOND_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      }
-    ],
-    "datePublished": "2024-01-01",
-    "publisher": {
-      "@type": "Organization",
-      "name": "CONFERENCE_OR_JOURNAL_NAME"
-    },
-    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
-    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
-    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
-    "abstract": "FULL_ABSTRACT_TEXT_HERE",
-    "citation": "BIBTEX_CITATION_HERE",
-    "isAccessibleForFree": true,
-    "license": "https://creativecommons.org/licenses/by/4.0/",
-    "mainEntity": {
-      "@type": "WebPage",
-      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
-    },
-    "about": [
-      {
-        "@type": "Thing",
-        "name": "RESEARCH_AREA_1"
-      },
-      {
-        "@type": "Thing", 
-        "name": "RESEARCH_AREA_2"
-      }
-    ]
+</noscript>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer src="static/js/fontawesome.all.min.js"></script>
+<script defer src="static/js/bulma-carousel.min.js"></script>
+<script defer src="static/js/bulma-slider.min.js"></script>
+<script defer src="static/js/index.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "CrystalReasoner: Reasoning and RL for Property-Conditioned Crystal Structure Generation",
+  "description": "CrystalReasoner is an end-to-end LLM framework for generating crystal structures from natural-language instructions through physical-prior thinking traces and reinforcement learning with verifiable rewards.",
+  "author": [
+    {"@type": "Person", "name": "Yuyang Wu", "affiliation": {"@type": "Organization", "name": "Tsinghua University"}},
+    {"@type": "Person", "name": "Stefano Falletta", "affiliation": {"@type": "Organization", "name": "Radical AI"}},
+    {"@type": "Person", "name": "Delia McGrath", "affiliation": {"@type": "Organization", "name": "Radical AI"}},
+    {"@type": "Person", "name": "Sherry Yang", "affiliation": {"@type": "Organization", "name": "New York University"}}
+  ],
+  "datePublished": "2026",
+  "keywords": ["crystal structure generation", "materials discovery", "language models", "reinforcement learning", "property-conditioned generation"],
+  "isAccessibleForFree": true
+}
+</script>
+
+<style>
+  .cr-hero {
+    background: #ffffff;
   }
-  </script>
-  
-  <!-- Website/Organization Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "INSTITUTION_OR_LAB_NAME",
-    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
-    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
-    "sameAs": [
-      "https://twitter.com/YOUR_TWITTER_HANDLE",
-      "https://github.com/YOUR_GITHUB_USERNAME"
-    ]
+
+  .cr-kicker {
+    color: #0f766e;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 1rem;
   }
-  </script>
+
+  .cr-summary {
+    color: #475569;
+    font-size: 1.16rem;
+    line-height: 1.75;
+    max-width: 920px;
+    margin: 1.5rem auto 0;
+  }
+
+  .cr-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: #334155;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    font-weight: 700;
+    padding: 0.45rem 0.85rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .cr-figure {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 16px rgb(15 23 42 / 0.08);
+  }
+
+  .cr-figure object,
+  .cr-figure img {
+    width: 100%;
+    border-radius: 6px;
+    display: block;
+  }
+
+  .cr-figure object {
+    min-height: 430px;
+  }
+
+  .cr-caption {
+    color: #64748b;
+    font-size: 0.96rem;
+    line-height: 1.6;
+    margin-top: 0.8rem;
+  }
+
+  .cr-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .cr-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.15rem;
+    background: #ffffff;
+    height: 100%;
+  }
+
+  .cr-card h3 {
+    color: #0f172a;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.55rem;
+  }
+
+  .cr-card p {
+    color: #64748b;
+    line-height: 1.65;
+  }
+
+  .cr-metric {
+    color: #0f766e;
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 0.35rem;
+  }
+
+  .cr-section-lead {
+    color: #64748b;
+    font-size: 1.08rem;
+    line-height: 1.75;
+    max-width: 850px;
+    margin: -0.5rem auto 2rem;
+    text-align: center;
+  }
+
+  .cr-artifact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .cr-feature img {
+    width: 100%;
+    border-radius: 6px;
+    display: block;
+    margin-top: 1.15rem;
+  }
+
+  .cr-feature h3 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  .cr-feature p {
+    color: #64748b;
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .cr-artifact {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem;
+    background: #ffffff;
+  }
+
+  .cr-artifact object,
+  .cr-artifact img {
+    width: 100%;
+    min-height: 320px;
+    border-radius: 6px;
+    display: block;
+  }
+
+  .cr-artifact img {
+    min-height: 0;
+  }
+
+  .cr-artifact h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    margin: 0.85rem 0 0.35rem;
+  }
+
+  .cr-artifact p {
+    color: #64748b;
+    line-height: 1.6;
+  }
+
+  .cr-samples {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .cr-samples img {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 0.6rem;
+  }
+
+  @media screen and (max-width: 900px) {
+    .cr-grid,
+    .cr-artifact-grid,
+    .cr-samples {
+      grid-template-columns: 1fr;
+    }
+
+    .cr-figure object,
+    .cr-artifact object {
+      min-height: 300px;
+    }
+  }
+</style>
 </head>
 <body>
 
-
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+<button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
     <i class="fas fa-chevron-up"></i>
-  </button>
+</button>
+<div class="more-works-container" hidden>
+    <button class="more-works-btn" type="button" aria-hidden="true"></button>
+    <div id="moreWorksDropdown"></div>
+</div>
 
-  <!-- More Works Dropdown -->
-  <div class="more-works-container">
-    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
-      <i class="fas fa-flask"></i>
-      More Works
-      <i class="fas fa-chevron-down dropdown-arrow"></i>
-    </button>
-    <div class="more-works-dropdown" id="moreWorksDropdown">
-      <div class="dropdown-header">
-        <h4>More Works from Our Lab</h4>
-        <button class="close-btn" onclick="toggleMoreWorks()">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="works-list">
-        <!-- TODO: Replace with your lab's related works -->
-        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
-          <div class="work-info">
-            <!-- TODO: Replace with actual paper title -->
-            <h5>Paper Title 1</h5>
-            <!-- TODO: Replace with brief description -->
-            <p>Brief description of the work and its main contribution.</p>
-            <!-- TODO: Replace with venue and year -->
-            <span class="work-venue">Conference/Journal 2024</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <!-- TODO: Add more related works or remove extra items -->
-        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 2</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 3</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <main id="main-content">
-  <section class="hero">
+<main id="main-content">
+<section class="hero cr-hero">
     <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">Academic Project Page</h1>
+        <div class="container is-max-desktop has-text-centered">
+            <h1 class="title is-1 publication-title">CrystalReasoner: Reasoning and RL for Property-Conditioned Crystal Structure Generation</h1>
+
             <div class="is-size-5 publication-authors">
-              <!-- TODO: Replace with your paper authors and their personal links -->
-              <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">First Author</a><sup>*</sup>,</span>
-                <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
-                  <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
-                  </span>
-                  </div>
-
-                  <div class="is-size-5 publication-authors">
-                    <!-- TODO: Replace with your institution and conference/journal info -->
-                    <span class="author-block">Institution Name<br>Conference name and year</span>
-                    <!-- TODO: Remove this line if no equal contribution -->
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                  </div>
-
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- TODO: Update with your arXiv paper ID -->
-                      <span class="link-block">
-                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
-
-                    <!-- TODO: Add your supplementary material PDF or remove this section -->
-                    <span class="link-block">
-                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Supplementary</span>
-                    </a>
-                  </span>
-
-                  <!-- TODO: Replace with your GitHub repository URL -->
-                  <span class="link-block">
-                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-
-                <!-- TODO: Update with your arXiv paper ID -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
+                <span class="author-block"><a href="https://wyy603.github.io" target="_blank" rel="noopener">Yuyang Wu</a> <sup>1</sup>,</span>
+                <span class="author-block"><a href="https://sites.harvard.edu/stefanofalletta/" target="_blank" rel="noopener">Stefano Falletta</a> <sup>2</sup>,</span>
+                <span class="author-block"><a href="https://deliamcgrath.com/about.html" target="_blank" rel="noopener">Delia McGrath</a> <sup>2</sup>,</span>
+                <span class="author-block"><a href="https://sherryy.github.io/" target="_blank" rel="noopener">Sherry Yang</a> <sup>3</sup></span>
             </div>
-          </div>
+
+            <div class="is-size-5 publication-authors">
+                <span class="author-block"><sup>1</sup>Tsinghua University, <sup>2</sup>Radical AI, <sup>3</sup>New York University</span>
+            </div>
+
+            <div class="cr-status"><i class="fas fa-hourglass-half"></i><span>Manuscript under review</span></div>
+
+            <p class="cr-summary">
+                Generative modeling has emerged as a promising approach for crystal structure discovery. However, existing LLM-based generative models struggle with low-level atomic precision, while diffusion-based methods fall short in integrating high-level scientific knowledge. As a result, generated structures are often invalid, unstable, or do not possess desirable properties. To address this gap, we propose CrystalReasoner (CrysReas), an end-to-end LLM framework that generates crystal structures from natural language instructions through reasoning and alignment. CrysReas introduces physical priors as thinking tokens, which include crystallographic symmetry, local coordination environments and predicted physical properties before generating atomic coordinates. This bridges the gap between natural language and 3D structures. CrysReas then employs reinforcement learning (RL) with a multi-objective, dense reward function to align generation with physical validity, chemical consistency, and thermodynamic stability. For property-conditioned tasks, we design task-specific reward functions and train specialized models for discrete constraints (e.g., space group) and continuous properties (e.g., elasticity, thermal expansion). Empirical results demonstrate that compared to prior works and baselines without thinking traces or RL, CrysReas obtains better performance on diverse metrics, triples S.U.N. ratio, and achieves better performance for property conditioned generation. CrysReas also exhibits adaptive reasoning, increasing reasoning lengths as the number of atoms increases. Our work demonstrates the potential of leveraging thinking traces and RL for generating valid, stable, and property-conditioned crystal structures.
+            </p>
+
+            <div class="publication-links">
+                <span class="link-block">
+                    <a href="https://github.com/wyy603/CrystalReasoner" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fab fa-github"></i></span>
+                        <span>Code</span>
+                    </a>
+                </span>
+                <span class="link-block">
+                    <a href="#overview" class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fas fa-project-diagram"></i></span>
+                        <span>Method</span>
+                    </a>
+                </span>
+                <span class="link-block">
+                    <a href="#results" class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fas fa-chart-line"></i></span>
+                        <span>Results</span>
+                    </a>
+                </span>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
-
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <!-- TODO: Replace with your teaser video -->
-      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
-        <!-- TODO: Add your video file path here -->
-        <source src="static/videos/banner_video.mp4" type="video/mp4">
-      </video>
-      <!-- TODO: Replace with your video description -->
-      <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
-      </h2>
+<section class="section" id="overview">
+    <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Method Overview</h2>
+        <p class="cr-section-lead">
+            We propose CrystalReasoner, an end-to-end framework that converts high-level textual instructions into high-fidelity low-level crystal structures through reasoning and alignment.
+        </p>
+        <div class="cr-figure">
+            <img src="static/images/outline.svg" alt="CrystalReasoner pipeline overview" loading="lazy">
+            <p class="cr-caption">
+                Overview of the CrystalReasoner pipeline. An LLM is finetuned to first generate thinking traces in an abstract-to-concrete manner before outputting atomic coordinates. A multi-objective dense reward is used for RL (GRPO) alignment. The model can be used for formula conditioned generation generation, and can be further specialized with property-specific reward for property conditioned generation. 
+            </p>
+        </div>
     </div>
-  </div>
 </section>
-<!-- End teaser video -->
 
-<!-- Paper abstract -->
 <section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <!-- TODO: Replace with your paper abstract -->
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
-          </p>
-        </div>
-      </div>
+    <div class="container is-max-desktop">
+        <article class="cr-feature">
+            <h3>Physical Priors as Thinking Tokens</h3>
+            <p>CrysReas is finetuned to generate physical priors as thinking traces before outputting atomic coordinates, following an abstract-to-concrete progression through reasoning about crystallographic symmetry, local coordination environments, and predicted properties (e.g., structure volume, formation energy). By introducing symbolic representations of the 3D structure through text, LLMs can first reason about 3D structure before generating the structure itself, making structure generation more tractable. </p>
+            <img src="static/images/prompt.svg" alt="Thinking trace prompt format" loading="lazy" style="width: 80%; height: auto; display: block; margin-left: auto; margin-right: auto;"">
+        </article>
     </div>
-  </div>
 </section>
-<!-- End paper abstract -->
 
-
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
+<section class="section">
+    <div class="container is-max-desktop">
+        <article class="cr-feature">
+            <h3>RL Optimization on Validity and Stability</h3>
+            <p>To improve precision of the generated atom locations, we apply RL with a carefully designed multi-objective dense reward function covering physical validity, chemical validity, and thermodynamic stability, guiding generation toward valid, low-energy configurations.</p>
+            <img src="static/images/e_hull.svg" alt="Energy above hull DFT validation" loading="lazy">
+        </article>
     </div>
-  </div>
-</div>
-</div>
 </section>
-<!-- End image carousel -->
 
-
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- TODO: Replace with your YouTube video ID -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+        <article class="cr-feature">
+            <h3>Property-Conditioned Generation</h3>
+            <p>To enable property conditioned generation, CrysReas employs RL with property-specific reward, supporting optimization with respect to both discrete constraints (e.g., space group) and continuous properties (e.g., elasticity, thermal expansion) calculated using surrogate MLIPs. By combining stability rewards with property-specific objectives, CrysReas can be specialized for diverse material design scenarios without architectural modifications</p>
+            <img src="static/images/conditioning.svg" alt="Property-conditioned generation results" loading="lazy">
+        </article>
     </div>
-  </div>
 </section>
-<!-- End youtube video -->
 
-
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4" type="video/mp4">
-          </video>
+<section class="section">
+    <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Experimental Results</h2>
+        <article class="cr-artifact">
+            <img src="static/images/cmp1.png" alt="Validity and consistency metrics" loading="lazy">
+            <h3>Comparison with Prior Methods</h3>
+            <p>Comparison of our model <code>CrysReas</code> to our implementations of prior works including <code>PLAID++ Wyckoff Base</code> and <code>CrystalTextLLM</code>. Our model achieves the best overall performance. </p>
+        </article>
+        <article class="cr-artifact">
+            <img src="static/images/cmp2.png" alt="Validity and consistency metrics" loading="lazy">
+            <h3>Ablation of Thinking and RL</h3>
+            <p>Performance comparison of model variants: <code>CrysReas-Base</code> (SFT baseline), <code>CrysReas-Thinking</code> (SFT + thinking traces), <code>CrysReas-RL</code> (SFT + RL), and full <code>CrysReas</code>. Thinking traces improve instruction following and validity; RL boosts uniqueness and stability; the full model achieves the best overall performance.</p>
+        </article>
+        <div class="cr-artifact-grid">
+            <article class="cr-artifact">
+                <img src="static/images/metrics.svg" alt="Validity and consistency metrics" loading="lazy">
+                <h3>Thinking improves validity and consistency</h3>
+                <p>Across atom-count and space-group complexity, thinking traces improve structural validity, composition consistency, and symmetry following.</p>
+            </article>
+            <article class="cr-artifact">
+                <img src="static/images/thinking_trace.svg" alt="Thinking trace analysis" loading="lazy">
+                <h3>Reasoning adapts to structure complexity</h3>
+                <p>Trace length grows with the number of atoms, and trace-segment ablations show the importance of hierarchical physical reasoning.</p>
+            </article>
+            <article class="cr-artifact">
+                <img src="static/images/e_hull.svg" alt="Energy above hull DFT validation" loading="lazy">
+                <h3>RL improves energy above hull</h3>
+                <p>DFT validation compares generated structures across model variants and shows lower energy distributions after RL alignment.</p>
+            </article>
+            <article class="cr-artifact">
+                <img src="static/images/conditioning.svg" alt="Property-conditioned generation results" loading="lazy">
+                <h3>Specialists follow target properties</h3>
+                <p>Task-specific RL improves target adherence for space group, elasticity, and thermal expansion while exposing useful validity trade-offs.</p>
+            </article>
         </div>
-        <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
     </div>
-  </div>
 </section>
-<!-- End video carousel -->
 
-
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
-      </div>
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Generated Structures</h2>
+        <p class="cr-section-lead">
+            We include qualitative examples showing generated structures from different space groups, alongside quantitative checks that compare predicted thinking-trace properties with realized structure properties.
+        </p>
+        <div class="cr-samples">
+            <img src="static/images/1.png" alt="Generated crystal structure example for Fm-3m" loading="lazy">
+            <img src="static/images/3.png" alt="Generated crystal structure example for Fd-3m" loading="lazy">
+            <img src="static/images/4.png" alt="Generated crystal structure example for P3m1" loading="lazy">
+        </div>
+        <div class="cr-figure" style="margin-top: 1rem;">
+            <img src="static/images/prediction_error.png" alt="Prediction error comparison for thinking trace properties" loading="lazy">
+            <p class="cr-caption">
+                Comparison between predicted properties (site, structure volume, bond length) in thinking traces and actual properties of generated structures across different space groups.
+            </p>
+        </div>
     </div>
-  </section>
-<!--End paper poster -->
+</section>
 
-
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
+<section class="section hero is-light" id="citation">
     <div class="container is-max-desktop content">
-      <div class="bibtex-header">
-        <h2 class="title">BibTeX</h2>
-        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-          <i class="fas fa-copy"></i>
-          <span class="copy-text">Copy</span>
-        </button>
-      </div>
-      <pre id="bibtex-code"><code>@article{YourPaperKey2024,
-  title={Your Paper Title Here},
-  author={First Author and Second Author and Third Author},
-  journal={Conference/Journal Name},
-  year={2024},
-  url={https://your-domain.com/your-project-page}
+        <div class="bibtex-header">
+            <h2 class="title">Citation</h2>
+            <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+                <i class="fas fa-copy"></i>
+                <span class="copy-text">Copy</span>
+            </button>
+        </div>
+        <p>The manuscript is currently under review; citation metadata will be updated after a public version is available.</p>
+        <pre id="bibtex-code"><code>@misc{wu2026crystalreasoner,
+  title={CrystalReasoner: Reasoning and RL for Property-Conditioned Crystal Structure Generation},
+  author={Yuyang Wu and Stefano Falletta and Delia McGrath and Sherry Yang},
+  year={2026},
+  note={Manuscript under review}
 }</code></pre>
     </div>
 </section>
-<!--End BibTex citation -->
+</main>
 
-
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-
+<footer class="footer">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
+                    <p>
+                        Website structure adapted from the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>.
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </footer>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+</body>
+</html>
